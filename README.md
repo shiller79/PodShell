@@ -16,13 +16,17 @@ PowerShell 3.0+
 
 Downlaod and unzip https://github.com/shiller79/PodShell/archive/master.zip
 
+Allow Execution of unsigned PowerShell scripts as Administrator if not already enabled.
+```
+Set-ExecutionPolicy Bypass
+```
+
 Load the Module
 ```
-init_PodShell.ps1
+Import-Module .\PodShell.psd1
 ```
 
 Test a cmdlet
-
 ```
 Get-FyydCategories
 ```
