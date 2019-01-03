@@ -14,9 +14,14 @@ function Invoke-FyydApi {
 
         [string] $uri = $apiurl + $endpoint + "?" + $parameterString
         $uri = [uri]::EscapeUriString($uri) 
-
         Write-Debug $uri 
-        $jsondata = Invoke-RestMethod -Method $method -Uri $uri
+
+      #  [string[]] $headers = @()
+        if ($fyydAccessToken -ne "") {
+            $headers = @{"Authorization" = "Bearer " + $fyydAccessToken}
+        }
+
+        $jsondata = Invoke-RestMethod -Method $method -Uri $uri -Headers $headers
 
         return $jsondata
     }

@@ -17,11 +17,11 @@
 function Get-FyydPodcastEpisodes {
 	[CmdletBinding(DefaultParametersetName="id")]
 	param (
-		[Parameter(Mandatory=$true, ParameterSetName="id", Position=0)]
+		[Parameter(Mandatory=$true, ParameterSetName="id", ValueFromPipelineByPropertyName=$true, Position=0)]
         [Alias("id")]
         [int] $podcast_id,
 
-		[Parameter(Mandatory=$true, ParameterSetName="slug", Position=0)]
+		[Parameter(Mandatory=$true, ParameterSetName="slug", ValueFromPipelineByPropertyName=$true, Position=0)]
         [string] $slug,
 
         [Parameter(Mandatory=$false, Position=1)]
