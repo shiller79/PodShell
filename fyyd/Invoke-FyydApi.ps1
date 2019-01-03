@@ -14,15 +14,16 @@ function Invoke-FyydApi {
 
         [string] $uri = $apiurl + $endpoint + "?" + $parameterString
         $uri = [uri]::EscapeUriString($uri) 
-        Write-Debug $uri 
+        Write-Debug "URL: $uri"
 
-      #  [string[]] $headers = @()
-        if ($fyydAccessToken -ne "") {
-            $headers = @{"Authorization" = "Bearer " + $fyydAccessToken}
+        $headers = @{}
+        if (-not [string]::IsNullOrEmpty($fyydAccessToken)) {
+            $headers.Add("Authorization", "Bearer $fyydAccessToken")
+            Write-Debug "Add Header `"Authorization`" `"Bearer $fyydAccessToken`""
         }
-
+        
         $jsondata = Invoke-RestMethod -Method $method -Uri $uri -Headers $headers
-
+    
         return $jsondata
     }
     End {}
