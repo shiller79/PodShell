@@ -73,6 +73,7 @@ NestedModules = @(
     '.\fyyd\Get-FyydCategories.ps1',
     '.\fyyd\Get-FyydCategory.ps1',
     '.\fyyd\Get-FyydCollection.ps1',
+    '.\fyyd\Get-FyydCurate.ps1',
     '.\fyyd\Get-FyydCuration.ps1',
     '.\fyyd\Get-FyydCurationEpisodes.ps1',
     '.\fyyd\Get-FyydEpisode.ps1',
@@ -81,10 +82,14 @@ NestedModules = @(
     '.\fyyd\Get-FyydPodcastEpisodes.ps1',
     '.\fyyd\Get-FyydPodcastSeason.ps1',
     '.\fyyd\Invoke-FyydApi.ps1',
-    '.\fyyd\Invoke-FyydLogin.ps1'
+    '.\fyyd\Invoke-FyydLogin.ps1',
+    '.\fyyd\New-FyydCuration.ps1',
+    '.\fyyd\Remove-FyydCuration.ps1',
     '.\fyyd\Search-FyydCuration.ps1',
     '.\fyyd\Search-FyydEpisode.ps1',
-    '.\fyyd\Search-FyydPodcast.ps1'
+    '.\fyyd\Search-FyydPodcast.ps1',
+    '.\fyyd\Set-FyydCurate.ps1',
+    '.\fyyd\Set-FyydCuration.ps1'
     )
 
 # Aus diesem Modul zu exportierende Funktionen. Um optimale Leistung zu erzielen, verwenden Sie keine Platzhalter und löschen den Eintrag nicht. Verwenden Sie ein leeres Array, wenn keine zu exportierenden Funktionen vorhanden sind.
@@ -97,6 +102,7 @@ CmdletsToExport = @(
     'Get-FyydAccountInfo',
     'Get-FyydCategories',
     'Get-FyydCategory',
+    'Get-FyydCurate',
     'Get-FyydCuration',
     'Get-FyydCurationEpisodes',
     'Get-FyydEpisode',
@@ -106,9 +112,13 @@ CmdletsToExport = @(
     'Get-FyydPodcastSeason',
     'Invoke-FyydApi',
     'Invoke-FyydLogin',
+    'New-FyydCuration',
+    'Remove-FyydCuration',
     'Search-FyydCuration',
     'Search-FyydEpisode',
-    'Search-FyydPodcast'
+    'Search-FyydPodcast',
+    'Set-FyydCurate',
+    'Set-FyydCuration'
 )
 
 # Die aus diesem Modul zu exportierenden Variablen
