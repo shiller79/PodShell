@@ -31,10 +31,12 @@ function Invoke-FyydLogin {
                 Write-Host "Token: $AccessToken"
                 $global:fyydAccessToken = $AccessToken
                 $waitforlogin = $false;
+                $web.quit()
             } elseif ($web.LocationURL -match "error=([^&]*)") {
                 $LoginError = $Matches[1]
                 Write-Error "Error: $LoginError"
                 $waitforlogin = $false;
+                $web.quit()
             }
         }
     }
