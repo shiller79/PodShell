@@ -33,7 +33,7 @@
     # Description = ''
 
     # Die für dieses Modul mindestens erforderliche Version des Windows PowerShell-Moduls
-    PowerShellVersion = '3.0'
+    PowerShellVersion = '5.0'
 
     # Der Name des für dieses Modul erforderlichen Windows PowerShell-Hosts
     # PowerShellHostName = ''
@@ -67,9 +67,10 @@
 
     # Die Module, die als geschachtelte Module des in "RootModule/ModuleToProcess" angegebenen Moduls importiert werden sollen.
     NestedModules     = @(
+        '.\Export-Opml.ps1',
         '.\Get-PodcastEpisodes.ps1',
         '.\Get-PodcastInfo.ps1',
-        '.\Out-Opml.ps1'
+        '.\Import-Opml.ps1'
     )
 
     # Aus diesem Modul zu exportierende Funktionen. Um optimale Leistung zu erzielen, verwenden Sie keine Platzhalter und löschen den Eintrag nicht. Verwenden Sie ein leeres Array, wenn keine zu exportierenden Funktionen vorhanden sind.
@@ -77,9 +78,10 @@
 
     # Aus diesem Modul zu exportierende Cmdlets. Um optimale Leistung zu erzielen, verwenden Sie keine Platzhalter und löschen den Eintrag nicht. Verwenden Sie ein leeres Array, wenn keine zu exportierenden Cmdlets vorhanden sind.
     CmdletsToExport   = @(
+        "Export-Opml",
         "Get-PodcastEpisodes",
         "Get-PodcastInfo",
-        "Out-Opml"
+        "Import-Opml"
     )
 
     # Die aus diesem Modul zu exportierenden Variablen

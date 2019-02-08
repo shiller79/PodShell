@@ -1,11 +1,11 @@
-function Out-Opml {
+function Export-Opml {
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline = $true, Mandatory = $true, Position = 0)]
         [Object[]]$Podcast,
 
-        [Parameter(ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 1)]
-        [string] $Filename
+        [Parameter(Mandatory = $true, Position = 1)]
+        [string] $Path
     )
         
     Begin {
@@ -37,18 +37,18 @@ function Out-Opml {
 
     }
     End {
-        $_filename = Join-Path $PWD "test.opml"
+        
         $xmlWriterSettings = new-object System.Xml.XmlWriterSettings
         $xmlWriterSettings.CloseOutput = $true
         # 4 space indent
         $xmlWriterSettings.IndentChars = '    '
         $xmlWriterSettings.Indent = $true
         # $xmlWriterSettings.ConformanceLevel = 2
-        write-verbose  $('xml formatting - writing to ' + $_filename)
-        $xmlWriter = [System.Xml.XmlWriter]::Create($_filename, $xmlWriterSettings)
+        write-verbose  $('xml formatting - writing to ' + $Path)
+        $xmlWriter = [System.Xml.XmlWriter]::Create($Path, $xmlWriterSettings)
         $OutOpml.Save($xmlWriter)
         $xmlWriter.Close()
     }
 }
 
-Export-ModuleMember Out-Opml
+Export-ModuleMember Export-Opml
