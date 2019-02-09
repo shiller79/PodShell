@@ -67,6 +67,7 @@
 
     # Die Module, die als geschachtelte Module des in "RootModule/ModuleToProcess" angegebenen Moduls importiert werden sollen.
     NestedModules     = @(
+        '.\classes.ps1',
         '.\Export-Opml.ps1',
         '.\Get-PodcastEpisodes.ps1',
         '.\Get-PodcastInfo.ps1',

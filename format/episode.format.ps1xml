@@ -1,9 +1,9 @@
 <Configuration>
    <ViewDefinitions>
       <View>
-         <Name>PodShell.Episode.TableView</Name>
+         <Name>Episode.TableView</Name>
          <ViewSelectedBy>
-            <TypeName>PodShell.Episode</TypeName>
+            <TypeName>Episode</TypeName>
          </ViewSelectedBy>
          <TableControl>
             <TableHeaders>

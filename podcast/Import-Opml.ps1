@@ -1,21 +1,3 @@
-class Podcast {
-    [string]$Title
-    [string]$Subtitle
-    [string]$Summary
-    [string]$ImgUrl
-    [string]$XmlUrl
-    [string]$HtmlUrl
-    [string]$FirstUrl
-    [string]$NextUrl
-    [string]$PreviousUrl
-    [string]$LastUrl
-    [string]$Language
-    [string]$Generator
-    [datetime]$PubDate
-    [string]$rawdata
-}
-
-
 function Import-Opml {
     [CmdletBinding()]
     param (

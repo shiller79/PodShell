@@ -24,26 +24,43 @@ function Get-PodcastEpisodes {
         foreach ($item in $FeedXml.rss.channel.item) {
             
             $pubdate = [DateTime]::Parse($item.pubdate)
-
-            $outobject = [PSCustomObject]@{
-                PSTypeName = 'PodShell.Episode'
-                title = $item.title
-                guid = $item.guid.InnerText
-                url = $item.selectNodes("link").InnerText
-                enclosure = $item.enclosure.url
-                duration = $item.duration
-                pubdate =  $pubdate
-                episode = [int]$item.episode
-                season = [int]$item.season
-                episodeType = $item.episodeType
-                imgURL = $item.image.href
-                subtitle = $item.subtitle
-                summary = $item.summary
-                description = $item.description.InnerText
-                descriptionHTML = $item.encoded.InnerText
-                chapters = $item.chapters.chapter
-                rawdata = $item
-            }
+            
+            [Episode]$outobject = [Episode]::new()
+            $outobject.title = $item.title
+            $outobject.guid = $item.guid.InnerText
+            $outobject.url = $item.selectNodes("link").InnerText
+            $outobject.enclosure = $item.enclosure.url
+            $outobject.duration = $item.duration
+            $outobject.pubdate = $pubdate
+            $outobject.episode = [int]$item.episode
+            $outobject.season = [int]$item.season
+            $outobject.episodeType = $item.episodeType
+            $outobject.imgURL = $item.image.href
+            $outobject.subtitle = $item.subtitle
+            $outobject.summary = $item.summary
+            $outobject.description = $item.description.InnerText
+            $outobject.descriptionHTML = $item.encoded.InnerText
+            $outobject.chapters = $item.chapters.chapter
+            $outobject.rawdata = $item
+            # $outobject = [PSCustomObject]@{
+            #     PSTypeName      = 'PodShell.Episode'
+            #     title           = $item.title
+            #     guid            = $item.guid.InnerText
+            #     url             = $item.selectNodes("link").InnerText
+            #     enclosure       = $item.enclosure.url
+            #     duration        = $item.duration
+            #     pubdate         = $pubdate
+            #     episode         = [int]$item.episode
+            #     season          = [int]$item.season
+            #     episodeType     = $item.episodeType
+            #     imgURL          = $item.image.href
+            #     subtitle        = $item.subtitle
+            #     summary         = $item.summary
+            #     description     = $item.description.InnerText
+            #     descriptionHTML = $item.encoded.InnerText
+            #     chapters        = $item.chapters.chapter
+            #     rawdata         = $item
+            # }
             $outobject
         }
     }

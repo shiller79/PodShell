@@ -77,24 +77,24 @@ function Get-PodcastInfo {
                 try { $pubdate = [DateTime]::Parse($channel.lastBuildDate) }  catch  {Write-Verbose "Error parsing lastBuildDate"}
             } 
 
-            $outobject = [PSCustomObject]@{
-                PSTypeName = 'PodShell.Podcast'
-                Title = (Select-Xml -Xml $FeedXml -XPath "/rss/channel/title" -Namespace $Namespace).Node.InnerText
-                Subtitle = $subtitle
-                Summary = (Select-Xml -Xml $FeedXml -XPath "/rss/channel/summary" -Namespace $Namespace).Node.InnerText
-                ImgUrl = (Select-Xml -Xml $FeedXml -XPath "/rss/channel/image/url" -Namespace $Namespace).Node.InnerText
-                XmlUrl = (Select-Xml -Xml $FeedXml -XPath '/rss/channel/atom:link[@rel="self"]' -Namespace $Namespace).Node.href.InnerText
-                HtmlUrl = (Select-Xml -Xml $FeedXml -XPath "/rss/channel/link" -Namespace $Namespace).Node.InnerText
-                FirstUrl = (Select-Xml -Xml $FeedXml -XPath '/rss/channel/atom:link[@rel="first"]' -Namespace $Namespace).Node.href.InnerText
-                NextUrl = (Select-Xml -Xml $FeedXml -XPath '/rss/channel/atom:link[@rel="next"]' -Namespace $Namespace).Node.href.InnerText
-                PreviousUrl = (Select-Xml -Xml $FeedXml -XPath '/rss/channel/atom:link[@rel="next"]' -Namespace $Namespace).Node.href.InnerText
-                LastUrl = (Select-Xml -Xml $FeedXml -XPath '/rss/channel/atom:link[@rel="last"]' -Namespace $Namespace).Node.href.InnerText
+            [Podcast]$outobject = [Podcast]::new()
+            
+            $outobject.PSTypeName = 'PodShell.Podcast'
+            $outobject.Title = (Select-Xml -Xml $FeedXml -XPath "/rss/channel/title" -Namespace $Namespace).Node.InnerText
+            $outobject.Subtitle = $subtitle
+            $outobject.Summary = (Select-Xml -Xml $FeedXml -XPath "/rss/channel/summary" -Namespace $Namespace).Node.InnerText
+            $outobject.ImgUrl = (Select-Xml -Xml $FeedXml -XPath "/rss/channel/image/url" -Namespace $Namespace).Node.InnerText
+            $outobject.XmlUrl = (Select-Xml -Xml $FeedXml -XPath '/rss/channel/atom:link[@rel="self"]' -Namespace $Namespace).Node.href.InnerText
+            $outobject.HtmlUrl = (Select-Xml -Xml $FeedXml -XPath "/rss/channel/link" -Namespace $Namespace).Node.InnerText
+            $outobject.FirstUrl = (Select-Xml -Xml $FeedXml -XPath '/rss/channel/atom:link[@rel="first"]' -Namespace $Namespace).Node.href.InnerText
+            $outobject.NextUrl = (Select-Xml -Xml $FeedXml -XPath '/rss/channel/atom:link[@rel="next"]' -Namespace $Namespace).Node.href.InnerText
+            $outobject.PreviousUrl = (Select-Xml -Xml $FeedXml -XPath '/rss/channel/atom:link[@rel="next"]' -Namespace $Namespace).Node.href.InnerText
+            $outobject.LastUrl = (Select-Xml -Xml $FeedXml -XPath '/rss/channel/atom:link[@rel="last"]' -Namespace $Namespace).Node.href.InnerText
 
-                Language = (Select-Xml -Xml $FeedXml -XPath "/rss/channel/language" -Namespace $Namespace).Node.InnerText
-                Generator = (Select-Xml -Xml $FeedXml -XPath "/rss/channel/generator" -Namespace $Namespace).Node.InnerText
-                PubDate =  $pubdate
-                rawdata = $channel
-            }
+            $outobject.Language = (Select-Xml -Xml $FeedXml -XPath "/rss/channel/language" -Namespace $Namespace).Node.InnerText
+            $outobject.Generator = (Select-Xml -Xml $FeedXml -XPath "/rss/channel/generator" -Namespace $Namespace).Node.InnerText
+            $outobject.PubDate =  $pubdate
+            $outobject.rawdata = $channel
             
             return $outobject
         }
