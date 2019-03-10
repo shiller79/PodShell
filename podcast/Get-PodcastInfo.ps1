@@ -95,7 +95,7 @@ function Get-PodcastInfo {
             if ((Select-Xml -Xml $FeedXml -XPath "/rss/channel/itunes:explicit" -Namespace $Namespace).Node.InnerText -eq "Yes") { $outobject.Explicit = $true }
             if ((Select-Xml -Xml $FeedXml -XPath "/rss/channel/itunes:block" -Namespace $Namespace).Node.InnerText -eq "Yes") { $outobject.Block = $true }
             
-            $outobject.PubDate =  $pubdate
+            $outobject.PubDate = $pubdate
             $outobject.rawdata = $channel
             
             foreach ($item in $FeedXml.rss.channel.item) {
@@ -103,7 +103,7 @@ function Get-PodcastInfo {
                 $pubdate = [DateTime]::Parse($item.pubdate)
             
                 [Episode]$episodeobject = [Episode]::new()
-                $episodeobject.Title = (Select-Xml -Xml $item -XPath "title").Node.InnerText
+                $episodeobject.Title = (Select-Xml -Xml $item -XPath "title" - -Namespace $Namespace).Node.InnerText
                 $episodeobject.Guid = $item.guid.InnerText
                 $episodeobject.Url = $item.selectNodes("link").InnerText
 
