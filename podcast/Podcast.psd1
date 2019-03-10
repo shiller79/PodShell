@@ -69,9 +69,13 @@
     NestedModules     = @(
         '.\classes.ps1',
         '.\Export-Opml.ps1',
+        '.\Export-WebplayerJson.ps1',
         '.\Get-PodcastEpisodes.ps1',
         '.\Get-PodcastInfo.ps1',
-        '.\Import-Opml.ps1'
+        '.\Import-Opml.ps1',
+        '.\New-Podcast.ps1',
+        '.\New-PodcastEpisode.ps1',
+        '.\Search-ItunesPodcast.ps1'
     )
 
     # Aus diesem Modul zu exportierende Funktionen. Um optimale Leistung zu erzielen, verwenden Sie keine Platzhalter und löschen den Eintrag nicht. Verwenden Sie ein leeres Array, wenn keine zu exportierenden Funktionen vorhanden sind.
@@ -80,9 +84,14 @@
     # Aus diesem Modul zu exportierende Cmdlets. Um optimale Leistung zu erzielen, verwenden Sie keine Platzhalter und löschen den Eintrag nicht. Verwenden Sie ein leeres Array, wenn keine zu exportierenden Cmdlets vorhanden sind.
     CmdletsToExport   = @(
         "Export-Opml",
+        "Export-WebplayerJson",
+        "Find-LinksInSting"
         "Get-PodcastEpisodes",
         "Get-PodcastInfo",
-        "Import-Opml"
+        "Import-Opml",
+        "New-Podcast",
+        "New-PodcastEpisode",
+        "Search-ItunesPodcast"
     )
 
     # Die aus diesem Modul zu exportierenden Variablen

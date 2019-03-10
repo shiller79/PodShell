@@ -42,25 +42,7 @@ function Get-PodcastEpisodes {
             $outobject.descriptionHTML = $item.encoded.InnerText
             $outobject.chapters = $item.chapters.chapter
             $outobject.rawdata = $item
-            # $outobject = [PSCustomObject]@{
-            #     PSTypeName      = 'PodShell.Episode'
-            #     title           = $item.title
-            #     guid            = $item.guid.InnerText
-            #     url             = $item.selectNodes("link").InnerText
-            #     enclosure       = $item.enclosure.url
-            #     duration        = $item.duration
-            #     pubdate         = $pubdate
-            #     episode         = [int]$item.episode
-            #     season          = [int]$item.season
-            #     episodeType     = $item.episodeType
-            #     imgURL          = $item.image.href
-            #     subtitle        = $item.subtitle
-            #     summary         = $item.summary
-            #     description     = $item.description.InnerText
-            #     descriptionHTML = $item.encoded.InnerText
-            #     chapters        = $item.chapters.chapter
-            #     rawdata         = $item
-            # }
+            
             $outobject
         }
     }

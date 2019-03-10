@@ -25,33 +25,33 @@
 #>
 function Search-FyydEpisode {
     [CmdletBinding()]
-	param (
-		[Parameter(Mandatory=$false, Position=0)]
+    param (
+        [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName, Position = 0)]
         [string] $title,
 
-		[Parameter(Mandatory=$false)]
+        [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName)]
         [string] $guid,
 
         [Alias("id")]
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName)]
         [int] $podcast_id,
 
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName)]
         [string] $pubdate,
         
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName)]
         [int] $duration,
 
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName)]
         [string] $url,
 
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName)]
         [string] $podcast_title,
     
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName)]
         [string] $term,
 
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory = $false)]
         [int] $count = 10
     )
 

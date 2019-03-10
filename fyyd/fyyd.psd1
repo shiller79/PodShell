@@ -33,7 +33,7 @@ Copyright = '(c) 2018 hiller. Alle Rechte vorbehalten.'
 # Description = ''
 
 # Die für dieses Modul mindestens erforderliche Version des Windows PowerShell-Moduls
-PowerShellVersion = '3.0'
+PowerShellVersion = '5.0'
 
 # Der Name des für dieses Modul erforderlichen Windows PowerShell-Hosts
 # PowerShellHostName = ''
