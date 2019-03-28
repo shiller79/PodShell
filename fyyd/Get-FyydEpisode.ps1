@@ -7,9 +7,9 @@
     Get-FyydEpisode -id 1209129
 #>
 function Get-FyydEpisode {
-	[CmdletBinding()]
-	param (
-        [Parameter(ValueFromPipelineByPropertyName=$true, Mandatory=$true, Position=0)]
+    [CmdletBinding()]
+    param (
+        [Parameter(ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 0)]
         [Alias("id")]
         [int] $episode_id
     )
@@ -22,9 +22,10 @@ function Get-FyydEpisode {
 
         $jsondata = Invoke-FyydApi -parameter $parameter -endpoint "/episode" -method "Get"
 
-        return $jsondata.data
+        $outobject = Convert-FyydJson2EpisodeObject $jsondata.data
+        return $outobject
     }
-    End{}
+    End {}
 }
 
 Export-ModuleMember Get-FyydEpisode

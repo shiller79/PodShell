@@ -103,7 +103,7 @@ function Get-PodcastFeed {
                 $pubdate = [DateTime]::Parse($item.pubdate)
             
                 [Episode]$episodeobject = [Episode]::new()
-                $episodeobject.Title = (Select-Xml -Xml $item -XPath "title" - -Namespace $Namespace).Node.InnerText
+                $episodeobject.Title = (Select-Xml -Xml $item -XPath "title" -Namespace $Namespace).Node.InnerText
                 $episodeobject.Guid = $item.guid.InnerText
                 $episodeobject.Url = $item.selectNodes("link").InnerText
 
@@ -111,7 +111,8 @@ function Get-PodcastFeed {
                 $episodeobject.Enclosure.Length = $item.enclosure.Length
                 $episodeobject.Enclosure.Type = $item.enclosure.type
 
-                $episodeobject.duration = $item.duration
+                $durationarray = ($item.duration).Split(":")
+                $episodeobject.duration = New-TimeSpan -Hours $durationarray[0] -Minutes $durationarray[1] -Seconds $durationarray[2]
                 $episodeobject.pubdate = $pubdate
                 $episodeobject.episode = [int]$item.episode
                 $episodeobject.season = [int]$item.season
