@@ -4,7 +4,7 @@
 .DESCRIPTION
     Starts the Podlove Webplayer in default browser.
 .EXAMPLE
-    $podcast = Get-PodcastInfo https://www.nussschale-podcast.de/feed/mp3/
+    $podcast = Get-PodcastFeed https://www.nussschale-podcast.de/feed/mp3/
     Export-WebplayerJson -Episode $podcast.Episodes[0] -Podcast $podcast | Start-PodloveWebPlayer
 #>
 function Start-PodloveWebplayer {

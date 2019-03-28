@@ -71,7 +71,7 @@
         '.\Export-Opml.ps1',
         '.\Export-WebplayerJson.ps1',
         '.\Get-PodcastEpisodes.ps1',
-        '.\Get-PodcastInfo.ps1',
+        '.\Get-PodcastFeed.ps1',
         '.\Import-Opml.ps1',
         '.\New-Podcast.ps1',
         '.\New-PodcastEpisode.ps1',
@@ -88,7 +88,7 @@
         "Export-WebplayerJson",
         "Find-LinksInSting"
         "Get-PodcastEpisodes",
-        "Get-PodcastInfo",
+        "Get-PodcastFeed",
         "Get-RedirectUrl",
         "Import-Opml",
         "New-Podcast",

@@ -27,7 +27,7 @@ function GetAtomLinks {
 .EXAMPLE
     Get-PodcastInfo
 #>
-function Get-PodcastInfo {
+function Get-PodcastFeed {
 	[CmdletBinding()]
 	param (
         [Parameter(ValueFromPipelineByPropertyName=$true, Mandatory=$true, Position=0,ParameterSetName="url")]
@@ -144,4 +144,4 @@ function Get-PodcastInfo {
 
 }
 
-Export-ModuleMember Get-PodcastInfo
+Export-ModuleMember Get-PodcastFeed
