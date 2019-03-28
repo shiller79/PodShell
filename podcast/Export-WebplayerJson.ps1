@@ -1,51 +1,15 @@
-class pwpShow {
-    [string]$title
-    [string]$subtitle
-    [string]$summary
-    [string]$poster
-    [string]$link
-}
-
-class pwpAudio {
-    [string]$url
-    [string]$size
-    [string]$title
-    [string]$mimeType
-}
-
-class pwpChapter {
-    [string]$start
-    [string]$title
-    [string]$href
-    [string]$img
-}
-
-class pwp {
-    [pwpShow]$show = [pwpShow]::new()
-    [string]$title
-    [string]$subtitle
-    [string]$summary
-    [string]$publicationDate
-    [string]$poster
-    [string]$duration
-    [string]$link
-    [pwpAudio[]]$audio = @() 
-    [pwpChapter[]]$chapters = @()
-}
 
 
 
 function Export-WebplayerJson {
     [CmdletBinding()]
+    [OutputType([string])]
     param (
         [Parameter(ValueFromPipeline = $true, Mandatory = $true, Position = 0)]
-        [Episode] $Episode,
+        [Episode]$Episode,
         
-        [Parameter(Mandatory = $true, Position = 1)]
-        [Podcast]$Podcast,
-
-        [Parameter(Mandatory = $true, Position = 2)]
-        [string] $Path
+        [Parameter(Mandatory = $false, Position = 1)]
+        [Podcast]$Podcast
     )
         
     Begin {}
@@ -82,8 +46,9 @@ function Export-WebplayerJson {
             $OutObject.chapters += $chapterobject
         }
 
-        $OutObject | ConvertTo-Json -depth 100 | Out-File $Path
+        return $OutObject | ConvertTo-Json -depth 100
     }
     End {}
 }
+
 Export-ModuleMember Export-WebplayerJson

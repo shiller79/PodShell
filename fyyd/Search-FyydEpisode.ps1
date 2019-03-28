@@ -54,21 +54,24 @@ function Search-FyydEpisode {
         [Parameter(Mandatory = $false)]
         [int] $count = 10
     )
+    begin {}
+    process {
+        [string[]] $parameter = @()     # init parameter array
+        if ($title) { $parameter += "title=$title" }
+        if ($guid) { $parameter += "guid=$guid" }
+        if ($podcast_id) { $parameter += "podcast_id=$podcast_id" }
+        if ($pubdate) { $parameter += "pubdate=$pubdate" }
+        if ($duration) { $parameter += "duration=$duration" }
+        if ($url) { $parameter += "url=$url" }
+        if ($podcast_title) { $parameter += "podcast_title=$podcast_title" }
+        if ($podcast_id) { $parameter += "podcast_id=$podcast_id" }
+        if ($term) { $parameter += "term=$term" }
+        if ($count) { $paremeter += "count=$count" }
+        $jsondata = Invoke-FyydApi -parameter $parameter -endpoint "/search/episode" -method "Get" -ErrorAction Continue
 
-    [string[]] $parameter = @()     # init parameter array
-    if ($title) { $parameter += "title=$title" }
-    if ($guid) { $parameter += "guid=$guid" }
-    if ($podcast_id) { $parameter += "podcast_id=$podcast_id" }
-    if ($pubdate) { $parameter += "pubdate=$pubdate" }
-    if ($duration) { $parameter += "duration=$duration" }
-    if ($url) { $parameter += "url=$url" }
-    if ($podcast_title) { $parameter += "podcast_title=$podcast_title" }
-    if ($podcast_id) { $parameter += "podcast_id=$podcast_id" }
-    if ($term) { $parameter += "term=$term" }
-    if ($count) { $paremeter += "count=$count" }
-    $jsondata = Invoke-FyydApi -parameter $parameter -endpoint "/search/episode" -method "Get"
-
-    return $jsondata.data
+        return $jsondata.data
+    }
+    end {}
 }
 
 Export-ModuleMember Search-FyydEpisode

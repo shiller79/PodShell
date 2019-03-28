@@ -1,3 +1,39 @@
+class pwpShow {
+    [string]$title
+    [string]$subtitle
+    [string]$summary
+    [string]$poster
+    [string]$link
+}
+
+class pwpAudio {
+    [string]$url
+    [string]$size
+    [string]$title
+    [string]$mimeType
+}
+
+class pwpChapter {
+    [string]$start
+    [string]$title
+    [string]$href
+    [string]$img
+}
+
+class pwp {
+    [pwpShow]$show = [pwpShow]::new()
+    [string]$title
+    [string]$subtitle
+    [string]$summary
+    [string]$publicationDate
+    [string]$poster
+    [string]$duration
+    [string]$link
+    [pwpAudio[]]$audio = @() 
+    [pwpChapter[]]$chapters = @()
+}
+
+
 class Enclosure {
     [string]$Url
     [string]$Length
@@ -52,9 +88,11 @@ class Podcast {
     [System.Object]$rawdata
 }
 
+
 function Find-LinksInString {
     [CmdletBinding()]
     param (
+        [parameter(Mandatory, ValueFromPipeline)]
         $String 
     )
     
@@ -71,4 +109,37 @@ function Find-LinksInString {
     }
 }
 
-Export-ModuleMember Find-LinksInString
+function Get-RedirectUrl {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory, ValueFromPipeline)]
+        [string]
+        $Uri,
+        [int]
+        $MaximumRedirection = 10
+    )
+    
+    begin {}
+    
+    process {
+        do {
+            $response = Invoke-WebRequest -Method Head -MaximumRedirection 0 -ErrorAction SilentlyContinue -uri $Uri
+            if (($response.StatusCode -ge 300) -and ($response.StatusCode -le 399 )) {
+                $Uri = $response.Headers.Location
+                Write-Verbose $Uri
+                Write-Verbose $response.StatusCode
+                $MaximumRedirection--
+            }
+            else {
+                $MaximumRedirection = 0
+            }
+        } while ($MaximumRedirection -gt 0 )#loop while Status Code is 3xx Redirect
+        Write-Verbose $Uri
+        return $Uri
+    }
+
+    end {}
+}
+
+
+Export-ModuleMember Find-LinksInString, Get-RedirectUrl

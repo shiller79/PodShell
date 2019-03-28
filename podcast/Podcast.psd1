@@ -75,7 +75,8 @@
         '.\Import-Opml.ps1',
         '.\New-Podcast.ps1',
         '.\New-PodcastEpisode.ps1',
-        '.\Search-ItunesPodcast.ps1'
+        '.\Search-ItunesPodcast.ps1',
+        '.\Start-PodloveWebPlayer.ps1'
     )
 
     # Aus diesem Modul zu exportierende Funktionen. Um optimale Leistung zu erzielen, verwenden Sie keine Platzhalter und löschen den Eintrag nicht. Verwenden Sie ein leeres Array, wenn keine zu exportierenden Funktionen vorhanden sind.
@@ -88,10 +89,12 @@
         "Find-LinksInSting"
         "Get-PodcastEpisodes",
         "Get-PodcastInfo",
+        "Get-RedirectUrl",
         "Import-Opml",
         "New-Podcast",
         "New-PodcastEpisode",
-        "Search-ItunesPodcast"
+        "Search-ItunesPodcast",
+        "Start-PodloveWebPlayer"
     )
 
     # Die aus diesem Modul zu exportierenden Variablen
