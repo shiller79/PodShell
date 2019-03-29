@@ -146,7 +146,7 @@ function Convert-FyydJson2EpisodeObject {
         $fyydEpisode
     )
 
-    $pubdate = [DateTime]::Parse($item.pubdate)
+    #$pubdate = [DateTime]::Parse($fyydEpisode.pubdate)
             
     [Episode]$episodeobject = [Episode]::new()
     $episodeobject.Title = $fyydEpisode.title
@@ -158,7 +158,7 @@ function Convert-FyydJson2EpisodeObject {
     $episodeobject.Enclosure.Type = $fyydEpisode.content_type
 
     $episodeobject.duration = New-TimeSpan -Seconds $fyydEpisode.duration
-    $episodeobject.pubdate = $pubdate
+    $episodeobject.pubdate = [DateTime]::Parse($fyydEpisode.pubdate)
     $episodeobject.episode = $fyydEpisode.num_episode
     $episodeobject.season = $fyydEpisode.num_season
     #$episodeobject.episodeType = $item.episodeType
@@ -181,6 +181,7 @@ function Convert-FyydJson2EpisodeObject {
     #     $episodeobject.Chapters += $chapterobject
     # }
 
+    $episodeobject.rawdata = $fyydEpisode
     return $episodeobject
 }
 
