@@ -184,5 +184,13 @@ function Convert-FyydJson2EpisodeObject {
     return $episodeobject
 }
 
+function Get-Temp {
+    if ($env:TEMP) { $TEMP = $env:TEMP}
+    elseif ($env:TMPDIR) { $TEMP = $env:TMPDIR}
+    else { $TEMP = "/tmp"}
+
+    return $TEMP   
+}
+
 
 Export-ModuleMember Find-LinksInString, Get-RedirectUrl
