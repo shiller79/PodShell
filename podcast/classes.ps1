@@ -167,19 +167,17 @@ function Convert-FyydJson2EpisodeObject {
     #$episodeobject.summary = $item.summary
     #$episodeobject.description = $item.description.InnerText
     $episodeobject.descriptionHTML = $fyydEpisode.description
-             
-                
-    # foreach ($chapter in $item.chapters.chapter) {
+                         
+    foreach ($chapter in $fyydEpisode.chapters) {
                     
-    #     [Chapter]$chapterobject = [Chapter]::new()
-    #     #$chapter.chapter.start, $chapter.chapter.title, $chapter.chapter.href, $chapter.chapter.img)
-    #     $chapterobject.Start = $chapter.start
-    #     $chapterobject.Title = $chapter.title
-    #     $chapterobject.Href = $chapter.href
-    #     $chapterobject.Img = $chapter.img
-                    
-    #     $episodeobject.Chapters += $chapterobject
-    # }
+        [Chapter]$chapterobject = [Chapter]::new()
+        $chapterobject.Start = $chapter.start
+        $chapterobject.Title = $chapter.title
+        $chapterobject.Href = $chapter.href
+        $chapterobject.Img = $chapter.img
+    
+        $episodeobject.Chapters += $chapterobject
+    }
 
     $episodeobject.rawdata = $fyydEpisode
     return $episodeobject

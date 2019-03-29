@@ -17,7 +17,8 @@ function Start-PodloveWebplayer {
     [string]$template = Get-Content $templatepath
     $config = [System.Web.HttpUtility]::HtmlEncode($config) 
 
-    $temppath = Join-Path $env:TEMP "playertemp.html"
+    $temp = Get-Temp
+    $temppath = Join-Path $temp "playertemp.html"
     $template.Replace("{*config*}", $config) | Set-Content -Path $temppath
 
     Invoke-Item $temppath
