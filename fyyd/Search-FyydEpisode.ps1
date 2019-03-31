@@ -33,7 +33,7 @@ function Search-FyydEpisode {
         [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName)]
         [string] $guid,
 
-        [Alias("id")]
+        [Alias("id", "FyydPodcastId")]
         [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName)]
         [int] $podcast_id,
 

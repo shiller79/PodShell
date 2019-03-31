@@ -1,7 +1,4 @@
-Remove-Module Podcast -ErrorAction:SilentlyContinue
-Remove-Module fyyd -ErrorAction:SilentlyContinue
-#Import-Module .\podcast\podcast.psd1
-#Import-Module .\fyyd\fyyd.psd1
+Remove-Module PodShell -ErrorAction:SilentlyContinue
 
 $module = Join-Path $PSScriptRoot "PodShell.psd1"
 Import-Module $module

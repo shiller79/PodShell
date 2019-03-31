@@ -9,8 +9,8 @@
 function Start-PodloveSubscribeButton {
     [CmdletBinding()]
     param(
-        [Parameter(ValueFromPipeline = $true, Mandatory = $true, Position = 0)]
-        [Alias("xmlURL")]
+        [Parameter(ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 0)]
+        [Alias("XmlUrl")]
         [string]$url
     )
     $subsrcibeurl = "https://subscribe.podlove.org/" + $url

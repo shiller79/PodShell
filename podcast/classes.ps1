@@ -86,6 +86,8 @@ class Podcast {
     [Episode[]]$Episodes = @()
     [bool]$Explicit
     [bool]$Block
+    [int]$FyydPodcastId
+    [uri]$FyydUrl
     [System.Object]$rawdata
 }
 
@@ -188,6 +190,41 @@ function Convert-FyydJson2EpisodeObject {
     
     return $outobject
 }
+
+function Convert-FyydJson2PodcastObject {
+    param (
+        $fyydPodcast
+    )
+    
+    
+    [Podcast]$outobject = [Podcast]::new()
+    $outobject.Title = $fyydPodcast.title
+    $outobject.Subtitle = $fyydPodcast.subtitle
+    $outobject.Summary = $fyydPodcast.description
+    $outobject.ImgUrl = $fyydPodcast.imgURL
+    $outobject.XmlUrl = $fyydPodcast.XmlUrl
+    $outobject.HtmlUrl = $fyydPodcast.htmlURL
+    #$outobject.FirstUrl = (Select-Xml -Xml $FeedXml -XPath '/rss/channel/atom:link[@rel="first"]' -Namespace $Namespace).Node.href
+    #$outobject.NextUrl = (Select-Xml -Xml $FeedXml -XPath '/rss/channel/atom:link[@rel="next"]' -Namespace $Namespace).Node.href
+    #$outobject.PreviousUrl = (Select-Xml -Xml $FeedXml -XPath '/rss/channel/atom:link[@rel="next"]' -Namespace $Namespace).Node.href
+    #$outobject.LastUrl = (Select-Xml -Xml $FeedXml -XPath '/rss/channel/atom:link[@rel="last"]' -Namespace $Namespace).Node.href
+    $outobject.Language = $fyydPodcast.language
+    $outobject.Generator = $fyydPodcast.generator
+    
+    #if ((Select-Xml -Xml $FeedXml -XPath "/rss/channel/itunes:explicit" -Namespace $Namespace).Node.InnerText -eq "Yes") { $outobject.Explicit = $true }
+    #if ((Select-Xml -Xml $FeedXml -XPath "/rss/channel/itunes:block" -Namespace $Namespace).Node.InnerText -eq "Yes") { $outobject.Block = $true }
+    
+    $outobject.PubDate = $fyydPodcast.lastpub
+    
+    $outobject.Episodes = Convert-FyydJson2EpisodeObject -fyydEpisodes $fyydPodcast.Episode
+    
+    $outobject.FyydUrl = $fyydPodcast.url_fyyd
+    $outobject.FyydPodcastId = $fyydPodcast.id
+
+    $outobject.rawdata = $fyydPodcast
+    return $outobject
+}
+
 
 function Get-Temp {
     if ($env:TEMP) { $TEMP = $env:TEMP}

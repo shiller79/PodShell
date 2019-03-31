@@ -14,19 +14,20 @@
     Search-FyydPodcast -title "Freak-Schow"
 #>
 function Search-FyydPodcast {
+    [OutputType('Podcast')]
     [CmdletBinding()]
-	param (
-        [Parameter(Mandatory=$false)]
+    param (
+        [Parameter(Mandatory = $false)]
         [Alias("podcast_title")]
         [string] $title,
     
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory = $false)]
         [string] $url,
 
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory = $false)]
         [string] $term,
 
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory = $false)]
         [int] $count = 10
     )
     
@@ -38,7 +39,8 @@ function Search-FyydPodcast {
     
     $jsondata = Invoke-FyydApi -parameter $parameter -endpoint "/search/podcast" -method "Get"
 
-    return $jsondata.data
+    $outobject = Convert-FyydJson2PodcastObject $jsondata.data
+    return $outobject
 }
 
 Export-ModuleMember Search-FyydPodcast
