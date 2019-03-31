@@ -15,19 +15,20 @@
     Get-FyydPodcastEpisodes -id 42
 #>
 function Get-FyydPodcastEpisodes {
-	[CmdletBinding(DefaultParametersetName="id")]
-	param (
-		[Parameter(Mandatory=$true, ParameterSetName="id", ValueFromPipelineByPropertyName=$true, Position=0)]
+    [OutputType('Episode')]
+    [CmdletBinding(DefaultParametersetName = "id")]
+    param (
+        [Parameter(Mandatory = $true, ParameterSetName = "id", ValueFromPipelineByPropertyName = $true, Position = 0)]
         [Alias("id")]
         [int] $podcast_id,
 
-		[Parameter(Mandatory=$true, ParameterSetName="slug", ValueFromPipelineByPropertyName=$true, Position=0)]
+        [Parameter(Mandatory = $true, ParameterSetName = "slug", ValueFromPipelineByPropertyName = $true, Position = 0)]
         [string] $slug,
 
-        [Parameter(Mandatory=$false, Position=1)]
+        [Parameter(Mandatory = $false, Position = 1)]
         [int] $page = 0,
 
-        [Parameter(Mandatory=$false, Position=2)]
+        [Parameter(Mandatory = $false, Position = 2)]
         [int] $count = 50
     )
 
@@ -35,18 +36,18 @@ function Get-FyydPodcastEpisodes {
     Process {
         [string[]] $parameter = @()     # init parameter array
         
-        switch ($PsCmdlet.ParameterSetName)
-        {
-            "id"    { $parameter += "podcast_id=$podcast_id" ; break }
-            "slug"  { $parameter += "podcast_slug=$slug" ; break }
+        switch ($PsCmdlet.ParameterSetName) {
+            "id" { $parameter += "podcast_id=$podcast_id" ; break }
+            "slug" { $parameter += "podcast_slug=$slug" ; break }
         } 
 
         $parameter += "page=$page"
         $parameter += "count=$count"
 
         $jsondata = Invoke-FyydApi -parameter $parameter -endpoint "/podcast/episodes" -method "Get"
-
-        return $jsondata.data.episodes
+        
+        $outobject = Convert-FyydJson2EpisodeObject $jsondata.data.episodes
+        return $outobject
     }
     End {}
 }

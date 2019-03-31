@@ -1,7 +1,7 @@
 
 
 
-function Export-WebplayerJson {
+function Export-PodloveWebplayerJson {
     [CmdletBinding()]
     [OutputType([string])]
     param (
@@ -51,4 +51,4 @@ function Export-WebplayerJson {
     End {}
 }
 
-Export-ModuleMember Export-WebplayerJson
+Export-ModuleMember Export-PodloveWebplayerJson

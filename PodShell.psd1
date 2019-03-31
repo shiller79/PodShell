@@ -69,14 +69,12 @@
     NestedModules     = @(
         '.\podcast\classes.ps1',
         '.\podcast\Export-Opml.ps1',
-        '.\podcast\Export-WebplayerJson.ps1',
         '.\podcast\Get-PodcastEpisodes.ps1',
         '.\podcast\Get-PodcastFeed.ps1',
         '.\podcast\Import-Opml.ps1',
         '.\podcast\New-Podcast.ps1',
         '.\podcast\New-PodcastEpisode.ps1',
         '.\podcast\Search-ItunesPodcast.ps1',
-        '.\podcast\Start-PodloveWebPlayer.ps1',
         '.\fyyd\Get-FyydAccountCollections.ps1',
         '.\fyyd\Get-FyydAccountCurations.ps1',
         '.\fyyd\Get-FyydAccountInfo.ps1',
@@ -99,16 +97,19 @@
         '.\fyyd\Search-FyydEpisode.ps1',
         '.\fyyd\Search-FyydPodcast.ps1',
         '.\fyyd\Set-FyydCurate.ps1',
-        '.\fyyd\Set-FyydCuration.ps1'
+        '.\fyyd\Set-FyydCuration.ps1',
+        '.\podlove\Export-PodloveWebplayerJson.ps1',
+        '.\podlove\Start-PodloveWebPlayer.ps1',
+        '.\podlove\Start-PodloveSubscribeButton.ps1'
     )
-
+        
     # Aus diesem Modul zu exportierende Funktionen. Um optimale Leistung zu erzielen, verwenden Sie keine Platzhalter und löschen den Eintrag nicht. Verwenden Sie ein leeres Array, wenn keine zu exportierenden Funktionen vorhanden sind.
     FunctionsToExport = @()
 
     # Aus diesem Modul zu exportierende Cmdlets. Um optimale Leistung zu erzielen, verwenden Sie keine Platzhalter und löschen den Eintrag nicht. Verwenden Sie ein leeres Array, wenn keine zu exportierenden Cmdlets vorhanden sind.
     CmdletsToExport   = @(
         "Export-Opml",
-        "Export-WebplayerJson",
+        "Export-PodloveWebplayerJson",
         "Find-LinksInSting"
         "Get-PodcastEpisodes",
         "Get-PodcastFeed",
@@ -139,7 +140,8 @@
         'Search-FyydEpisode',
         'Search-FyydPodcast',
         'Set-FyydCurate',
-        'Set-FyydCuration'
+        'Set-FyydCuration',
+        'Start-PodloveSubsribeButton'
     )
 
     # Die aus diesem Modul zu exportierenden Variablen

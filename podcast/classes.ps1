@@ -65,6 +65,7 @@ class Episode {
     [string]$Description
     [string]$DescriptionHTML
     [Chapter[]]$Chapters = @()
+    [int]$FyydEpisodeId
     [System.Object]$rawdata
 }
 
@@ -143,44 +144,49 @@ function Get-RedirectUrl {
 
 function Convert-FyydJson2EpisodeObject {
     param (
-        $fyydEpisode
+        $fyydEpisodes
     )
-
-    #$pubdate = [DateTime]::Parse($fyydEpisode.pubdate)
-            
-    [Episode]$episodeobject = [Episode]::new()
-    $episodeobject.Title = $fyydEpisode.title
-    $episodeobject.Guid = $fyydEpisode.guid
-    $episodeobject.Url = $fyydEpisode.url
-
-    $episodeobject.Enclosure.Url = $fyydEpisode.enclosure
-    #$episodeobject.Enclosure.Length = $item.enclosure.Length
-    $episodeobject.Enclosure.Type = $fyydEpisode.content_type
-
-    $episodeobject.duration = New-TimeSpan -Seconds $fyydEpisode.duration
-    $episodeobject.pubdate = [DateTime]::Parse($fyydEpisode.pubdate)
-    $episodeobject.episode = $fyydEpisode.num_episode
-    $episodeobject.season = $fyydEpisode.num_season
-    #$episodeobject.episodeType = $item.episodeType
-    $episodeobject.imgURL = $fyydEpisode.imgURL
-    #$episodeobject.subtitle = $item.subtitle
-    #$episodeobject.summary = $item.summary
-    #$episodeobject.description = $item.description.InnerText
-    $episodeobject.descriptionHTML = $fyydEpisode.description
-                         
-    foreach ($chapter in $fyydEpisode.chapters) {
-                    
-        [Chapter]$chapterobject = [Chapter]::new()
-        $chapterobject.Start = $chapter.start
-        $chapterobject.Title = $chapter.title
-        $chapterobject.Href = $chapter.href
-        $chapterobject.Img = $chapter.img
     
-        $episodeobject.Chapters += $chapterobject
+    [Episode[]]$outobject = @()
+    foreach ($fyydEpisode in $fyydEpisodes) {
+        [Episode]$episodeobject = [Episode]::new()
+        $episodeobject.Title = $fyydEpisode.title
+        $episodeobject.Guid = $fyydEpisode.guid
+        $episodeobject.Url = $fyydEpisode.url
+
+        $episodeobject.Enclosure.Url = $fyydEpisode.enclosure
+        #$episodeobject.Enclosure.Length = $item.enclosure.Length
+        $episodeobject.Enclosure.Type = $fyydEpisode.content_type
+
+        $episodeobject.duration = New-TimeSpan -Seconds $fyydEpisode.duration
+        $episodeobject.pubdate = [DateTime]::Parse($fyydEpisode.pubdate)
+        $episodeobject.episode = $fyydEpisode.num_episode
+        $episodeobject.season = $fyydEpisode.num_season
+        #$episodeobject.episodeType = $item.episodeType
+        $episodeobject.imgURL = $fyydEpisode.imgURL
+        #$episodeobject.subtitle = $item.subtitle
+        #$episodeobject.summary = $item.summary
+        #$episodeobject.description = $item.description.InnerText
+        $episodeobject.descriptionHTML = $fyydEpisode.description
+        $episodeobject.FyydEpisodeId = $fyydEpisode.id
+    
+        foreach ($chapter in $fyydEpisode.chapters) {
+                    
+            [Chapter]$chapterobject = [Chapter]::new()
+            $chapterobject.Start = $chapter.start
+            $chapterobject.Title = $chapter.title
+            $chapterobject.Href = $chapter.href
+            $chapterobject.Img = $chapter.img
+    
+            $episodeobject.Chapters += $chapterobject
+        }
+
+        $episodeobject.rawdata = $fyydEpisode
+        $outobject += $episodeobject
     }
 
-    $episodeobject.rawdata = $fyydEpisode
-    return $episodeobject
+    
+    return $outobject
 }
 
 function Get-Temp {

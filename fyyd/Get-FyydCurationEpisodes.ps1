@@ -7,9 +7,10 @@
     Get-FyydCurationEpisodes -id 1209129
 #>
 function Get-FyydCurationEpisodes {
-	[CmdletBinding()]
-	param (
-        [Parameter(ValueFromPipelineByPropertyName=$true, Mandatory=$true, Position=0)]
+    [OutputType('Episode')]
+    [CmdletBinding()]
+    param (
+        [Parameter(ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 0)]
         [Alias("id")]
         [int] $curation_id
     )
@@ -21,10 +22,11 @@ function Get-FyydCurationEpisodes {
         $parameter += "curation_id=$curation_id" 
 
         $jsondata = Invoke-FyydApi -parameter $parameter -endpoint "/curation/episodes" -method "Get"
-
-        return $jsondata.data.episodes
+        
+        $outobject = Convert-FyydJson2EpisodeObject $jsondata.data.episodes
+        return $outobject
     }
-    End{}
+    End {}
 }
 
 Export-ModuleMember Get-FyydCurationEpisodes

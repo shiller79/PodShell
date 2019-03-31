@@ -24,6 +24,7 @@
     Search-FyydEpisodes -title "Zeit"
 #>
 function Search-FyydEpisode {
+    [OutputType('Episode')]
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName, Position = 0)]
@@ -69,7 +70,8 @@ function Search-FyydEpisode {
         if ($count) { $paremeter += "count=$count" }
         $jsondata = Invoke-FyydApi -parameter $parameter -endpoint "/search/episode" -method "Get" -ErrorAction Continue
 
-        return $jsondata.data
+        $outobject = Convert-FyydJson2EpisodeObject $jsondata.data
+        return $outobject
     }
     end {}
 }

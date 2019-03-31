@@ -24,4 +24,4 @@ function Start-PodloveWebplayer {
     Invoke-Item $temppath
 }
 
-Export-ModuleMember Start-PodloveWebplayer
+Export-ModuleMember Start-PodlovwSubscribeButton

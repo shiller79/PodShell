@@ -7,10 +7,11 @@
     Get-FyydEpisode -id 1209129
 #>
 function Get-FyydEpisode {
+    [OutputType('Episode')]
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 0)]
-        [Alias("id")]
+        [Alias("id", "FyydEpisodeId")]
         [int] $episode_id
     )
     
