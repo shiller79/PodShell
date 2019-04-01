@@ -1,1 +1,0 @@
-(Get-FyydCollection -id 1141).podcasts | Get-FyydPodcastEpisodes -count 5 | Where-Object {[DateTime]::Parse($_.pubdate) -gt "2018-12-31"} |ft id, title, pubdate, podcast_id

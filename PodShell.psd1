@@ -81,6 +81,7 @@
         '.\fyyd\Get-FyydCategories.ps1',
         '.\fyyd\Get-FyydCategory.ps1',
         '.\fyyd\Get-FyydCollection.ps1',
+        '.\fyyd\Get-FyydCollectionPodcasts.ps1',
         '.\fyyd\Get-FyydCurate.ps1',
         '.\fyyd\Get-FyydCuration.ps1',
         '.\fyyd\Get-FyydCurationEpisodes.ps1',

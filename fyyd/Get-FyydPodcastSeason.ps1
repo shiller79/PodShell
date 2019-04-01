@@ -21,36 +21,36 @@
     Get-FyydPodcastSeason -id 703 -season 1
 #>
 function Get-FyydPodcastSeason {
-	[CmdletBinding(DefaultParametersetName="id")]
-	param (
-		[Parameter(Mandatory=$true, ParameterSetName="id", Position=0)]
+    [OutputType('Episode')]
+    [CmdletBinding(DefaultParametersetName = "id")]
+    param (
+        [Parameter(Mandatory = $true, ParameterSetName = "id", Position = 0)]
         [Alias("id")]
         [int] $podcast_id,
 
-		[Parameter(Mandatory=$true, ParameterSetName="slug", Position=0)]
+        [Parameter(Mandatory = $true, ParameterSetName = "slug", Position = 0)]
         [string] $slug,
 
-        [Alias("num_season","season_number")]
-        [Parameter(Mandatory=$true, Position=1)]
+        [Alias("num_season", "season_number")]
+        [Parameter(Mandatory = $true, Position = 1)]
         [int] $season,
 
-        [Parameter(Mandatory=$false, Position=2)]
+        [Parameter(Mandatory = $false, Position = 2)]
         [int] $episode,
 
-        [Parameter(Mandatory=$false, Position=3)]
+        [Parameter(Mandatory = $false, Position = 3)]
         [int] $page = 0,
 
-        [Parameter(Mandatory=$false, Position=4)]
+        [Parameter(Mandatory = $false, Position = 4)]
         [int] $count = 50
     )
 
     Begin {}
-    Process{
+    Process {
         [string[]] $parameter = @()     # init parameter array
-        switch ($PsCmdlet.ParameterSetName)
-        {
-            "id"    { $parameter += "podcast_id=$id" ; break }
-            "slug"  { $parameter += "podcast_slug=$slug" ; break }
+        switch ($PsCmdlet.ParameterSetName) {
+            "id" { $parameter += "podcast_id=$id" ; break }
+            "slug" { $parameter += "podcast_slug=$slug" ; break }
         } 
 
         $parameter += "season_number=$season"
@@ -60,7 +60,8 @@ function Get-FyydPodcastSeason {
 
         $jsondata = Invoke-FyydApi -parameter $parameter -endpoint "/podcast/season" -method "Get"
 
-        return $jsondata.data.episodes
+        $outobject = Convert-FyydJson2EpisodeObject $jsondata.data.episodes
+        return $outobject
     }
     End {}
 }

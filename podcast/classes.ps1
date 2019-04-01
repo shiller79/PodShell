@@ -193,35 +193,35 @@ function Convert-FyydJson2EpisodeObject {
 
 function Convert-FyydJson2PodcastObject {
     param (
-        $fyydPodcast
+        $fyydPodcasts
     )
     
+    [Podcast[]]$outobject = @()
+    foreach ($fyydPodcast in $fyydPodcasts) {
+        [Podcast]$podcastobject = [Podcast]::new()
+        $podcastobject.Title = $fyydPodcast.title
+        $podcastobject.Subtitle = $fyydPodcast.subtitle
+        $podcastobject.Summary = $fyydPodcast.description
+        $podcastobject.ImgUrl = $fyydPodcast.imgURL
+        $podcastobject.XmlUrl = $fyydPodcast.XmlUrl
+        $podcastobject.HtmlUrl = $fyydPodcast.htmlURL
+        #podcasttobject.FirstUrl = (Select-Xml -Xml $FeedXml -XPath '/rss/channel/atom:link[@rel="first"]' -Namespace $Namespace).Node.href
+        #podcasttobject.NextUrl = (Select-Xml -Xml $FeedXml -XPath '/rss/channel/atom:link[@rel="next"]' -Namespace $Namespace).Node.href
+        #podcasttobject.PreviousUrl = (Select-Xml -Xml $FeedXml -XPath '/rss/channel/atom:link[@rel="next"]' -Namespace $Namespace).Node.href
+        #podcasttobject.LastUrl = (Select-Xml -Xml $FeedXml -XPath '/rss/channel/atom:link[@rel="last"]' -Namespace $Namespace).Node.href
+        $podcastobject.Language = $fyydPodcast.language
+        $podcastobject.Generator = $fyydPodcast.generator
     
-    [Podcast]$outobject = [Podcast]::new()
-    $outobject.Title = $fyydPodcast.title
-    $outobject.Subtitle = $fyydPodcast.subtitle
-    $outobject.Summary = $fyydPodcast.description
-    $outobject.ImgUrl = $fyydPodcast.imgURL
-    $outobject.XmlUrl = $fyydPodcast.XmlUrl
-    $outobject.HtmlUrl = $fyydPodcast.htmlURL
-    #$outobject.FirstUrl = (Select-Xml -Xml $FeedXml -XPath '/rss/channel/atom:link[@rel="first"]' -Namespace $Namespace).Node.href
-    #$outobject.NextUrl = (Select-Xml -Xml $FeedXml -XPath '/rss/channel/atom:link[@rel="next"]' -Namespace $Namespace).Node.href
-    #$outobject.PreviousUrl = (Select-Xml -Xml $FeedXml -XPath '/rss/channel/atom:link[@rel="next"]' -Namespace $Namespace).Node.href
-    #$outobject.LastUrl = (Select-Xml -Xml $FeedXml -XPath '/rss/channel/atom:link[@rel="last"]' -Namespace $Namespace).Node.href
-    $outobject.Language = $fyydPodcast.language
-    $outobject.Generator = $fyydPodcast.generator
+        $podcastobject.PubDate = $fyydPodcast.lastpub
     
-    #if ((Select-Xml -Xml $FeedXml -XPath "/rss/channel/itunes:explicit" -Namespace $Namespace).Node.InnerText -eq "Yes") { $outobject.Explicit = $true }
-    #if ((Select-Xml -Xml $FeedXml -XPath "/rss/channel/itunes:block" -Namespace $Namespace).Node.InnerText -eq "Yes") { $outobject.Block = $true }
+        $podcastobject.Episodes = Convert-FyydJson2EpisodeObject -fyydEpisodes $fyydPodcast.Episode
     
-    $outobject.PubDate = $fyydPodcast.lastpub
-    
-    $outobject.Episodes = Convert-FyydJson2EpisodeObject -fyydEpisodes $fyydPodcast.Episode
-    
-    $outobject.FyydUrl = $fyydPodcast.url_fyyd
-    $outobject.FyydPodcastId = $fyydPodcast.id
+        $podcastobject.FyydUrl = $fyydPodcast.url_fyyd
+        $podcastobject.FyydPodcastId = $fyydPodcast.id
 
-    $outobject.rawdata = $fyydPodcast
+        $podcastobject.rawdata = $fyydPodcast
+        $outobject += $podcastobject
+    }
     return $outobject
 }
 

@@ -7,13 +7,14 @@
     Get-FyydPodcast -slug sendegarten-de
 #>
 function Get-FyydPodcast {
-	[CmdletBinding(DefaultParametersetName="id")]
-	param (
-        [Parameter(Mandatory=$true, ParameterSetName="id", Position=0)]
+    [OutputType('Podcast')]
+    [CmdletBinding(DefaultParametersetName = "id")]
+    param (
+        [Parameter(Mandatory = $true, ParameterSetName = "id", Position = 0)]
         [Alias("id")]
         [int] $podcast_id,
 
-		[Parameter(Mandatory=$true, ParameterSetName="slug", Position=0)]
+        [Parameter(Mandatory = $true, ParameterSetName = "slug", Position = 0)]
         [string] $slug
     )
     
@@ -21,17 +22,17 @@ function Get-FyydPodcast {
     Process {
         [string[]] $parameter = @()     # init parameter array
 
-        switch ($PsCmdlet.ParameterSetName)
-        {
-            "id"    { $parameter += "podcast_id=$podcast_id" ; break }
-            "slug"  { $parameter += "podcast_slug=$slug" ; break }
+        switch ($PsCmdlet.ParameterSetName) {
+            "id" { $parameter += "podcast_id=$podcast_id" ; break }
+            "slug" { $parameter += "podcast_slug=$slug" ; break }
         } 
 
         $jsondata = Invoke-FyydApi -parameter $parameter -endpoint "/podcast" -method "Get"
 
-        return $jsondata.data
+        $outobject = Convert-FyydJson2PodcastObject $jsondata.data
+        return $outobject
     }
-    End{}
+    End {}
 }
 
 Export-ModuleMember Get-FyydPodcast
