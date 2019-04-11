@@ -9,36 +9,37 @@
     Set-FyydCurate -curation_id 3135 -episode_id 3269363
 #>
 function Set-FyydCurate {
-	[CmdletBinding()]
-	param (
-        [Parameter(ValueFromPipelineByPropertyName=$true, Mandatory=$false, Position=0)]
+    [CmdletBinding()]
+    param (
+        [Parameter(ValueFromPipelineByPropertyName = $true, Mandatory = $false, Position = 0)]
         [int] $curation_id,
         
-        [Parameter(ValueFromPipelineByPropertyName=$true, Mandatory=$false, Position=1)]
+        [Parameter(ValueFromPipelineByPropertyName = $true, Mandatory = $false, Position = 1)]
+        [Alias("FyydEpisodeId")]
         [int] $episode_id,
 
-        [Parameter(Mandatory=$false, Position=2)]
+        [Parameter(Mandatory = $false, Position = 2)]
         [string] $why,
 
-        [Parameter(Mandatory=$false, Position=3)]
+        [Parameter(Mandatory = $false, Position = 3)]
         [int] $force_state
-        )
+    )
         
-        Begin {}
-        Process {
-            [string[]] $parameter = @()     # init parameter array
+    Begin { }
+    Process {
+        [string[]] $parameter = @()     # init parameter array
             
-            $parameter += "curation_id=$curation_id"
-            $parameter += "episode_id=$episode_id"
-            switch ($PSBoundParameters.Keys) {
-                'why'           { $parameter += "why=$why" }
-                'force_state'   { $parameter += "force_state=$force_state" }
-           }
-    
-            $jsondata = Invoke-FyydApi -parameter $parameter -endpoint "/curate" -method "Post" 
-    
-            return $jsondata.data
+        $parameter += "curation_id=$curation_id"
+        $parameter += "episode_id=$episode_id"
+        switch ($PSBoundParameters.Keys) {
+            'why' { $parameter += "why=$why" }
+            'force_state' { $parameter += "force_state=$force_state" }
         }
-        End{}
+    
+        $jsondata = Invoke-FyydApi -parameter $parameter -endpoint "/curate" -method "Post" 
+    
+        return $jsondata.data
     }
+    End { }
+}
 Export-ModuleMember Set-FyydCurate

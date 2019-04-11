@@ -69,6 +69,7 @@
     NestedModules     = @(
         '.\podcast\classes.ps1',
         '.\podcast\Export-Opml.ps1',
+        '.\podcast\Export-m3u.ps1',
         '.\podcast\Get-PodcastEpisodes.ps1',
         '.\podcast\Get-PodcastFeed.ps1',
         '.\podcast\Import-Opml.ps1',

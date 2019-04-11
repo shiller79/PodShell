@@ -7,6 +7,7 @@
     Search-ItunesPodcast
 #>
 function Search-ItuesPodcast {
+    [OutputType('Podcast')]
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 0)]
@@ -19,20 +20,22 @@ function Search-ItuesPodcast {
         $itunes = Invoke-RestMethod -Method "GET" -Uri "https://itunes.apple.com/search?country=de&media=podcast&term=$term"
         Write-Verbose $itunes
 
+        [Podcast[]] $outobject = @()
         foreach ($item in $itunes.results) {
             
-            [Podcast]$outobject = [Podcast]::new()
+            [Podcast]$ituesobject = [Podcast]::new()
             
-            $outobject.Title = $item.collectionName
-            $outobject.ImgUrl = $itunes.artworkUrl600
-            $outobject.XmlUrl = $item.feedUrl
-            if ($item.collectionExplicitness -eq "explicit") {$outobject.explicit = $true}
-            try { $outobject.pubdate = [DateTime]::Parse($item.releaseDate) }  catch {Write-Verbose "Error parsing pubdate"}
+            $ituesobject.Title = $item.collectionName
+            $ituesobject.ImgUrl = $itunes.artworkUrl600
+            $ituesobject.XmlUrl = $item.feedUrl
+            if ($item.collectionExplicitness -eq "explicit") {$ituesobject.explicit = $true}
+            try { $ituesobject.pubdate = [DateTime]::Parse($item.releaseDate) }  catch {Write-Verbose "Error parsing pubdate"}
             #todo: trackCount?, Cathegory
-            $outobject.rawdata = $item
+            $ituesobject.rawdata = $item
 
-            $outobject
+            $outobject += $ituesobject
         }
+        return $outobject
     }
     End {}
 }
