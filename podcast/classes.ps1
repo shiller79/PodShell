@@ -88,6 +88,9 @@ class Podcast {
     [bool]$Block
     [int]$FyydPodcastId
     [uri]$FyydUrl
+    [int]$ItunesId
+    [int]$PanoptikumId
+    [string]$WikidataId
     [System.Object]$rawdata
 }
 
@@ -122,7 +125,7 @@ function Get-RedirectUrl {
         $MaximumRedirection = 10
     )
     
-    begin {}
+    begin { }
     
     process {
         do {
@@ -141,7 +144,7 @@ function Get-RedirectUrl {
         return $Uri
     }
 
-    end {}
+    end { }
 }
 
 function Convert-FyydJson2EpisodeObject {
@@ -227,9 +230,9 @@ function Convert-FyydJson2PodcastObject {
 
 
 function Get-Temp {
-    if ($env:TEMP) { $TEMP = $env:TEMP}
-    elseif ($env:TMPDIR) { $TEMP = $env:TMPDIR}
-    else { $TEMP = "/tmp"}
+    if ($env:TEMP) { $TEMP = $env:TEMP }
+    elseif ($env:TMPDIR) { $TEMP = $env:TMPDIR }
+    else { $TEMP = "/tmp" }
 
     return $TEMP   
 }

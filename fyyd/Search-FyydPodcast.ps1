@@ -28,7 +28,7 @@ function Search-FyydPodcast {
         [string] $term,
 
         [Parameter(Mandatory = $false)]
-        [int] $count = 10
+        [int] $count
     )
     
     [string[]] $parameter = @()     # init parameter array

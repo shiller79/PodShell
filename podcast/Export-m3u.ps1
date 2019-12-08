@@ -5,21 +5,30 @@ function Export-m3u {
         [Object[]]$Episodes,
 
         [Parameter(Mandatory = $false, Position = 1)]
-        [string] $Path
+        [string] $FilePath,
+
+        [Parameter(Mandatory = $false)]
+        [switch]
+        $simpel
     )
         
     Begin {
         [string[]]$output = @()
+        if (-not $simpel) { $output += "#EXTM3U" }
     }
     Process {
 
+        if (-not $simpel) { $output += "#EXTINF:" + $Episodes.Duration.TotalSeconds + "," + $Episodes.Title }
         $output += $Episodes.Enclosure.Url
 
     }
     End {
-
-        return $output
-        
+        if ($FilePath) {
+            Out-File -FilePath $FilePath -InputObject $output 
+        }
+        else {
+            return $output
+        }
     }
 }
 
