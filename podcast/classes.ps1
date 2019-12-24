@@ -162,8 +162,8 @@ function Convert-FyydJson2EpisodeObject {
         $episodeobject.Enclosure.Url = $fyydEpisode.enclosure
         #$episodeobject.Enclosure.Length = $item.enclosure.Length
         $episodeobject.Enclosure.Type = $fyydEpisode.content_type
-
-        $episodeobject.duration = New-TimeSpan -Seconds $fyydEpisode.duration
+        
+        if($fyydEpisode.duration -match "^\d+$") { $episodeobject.duration = New-TimeSpan -Seconds $fyydEpisode.duration } #check numeric value
         $episodeobject.pubdate = [DateTime]::Parse($fyydEpisode.pubdate)
         $episodeobject.episode = $fyydEpisode.num_episode
         $episodeobject.season = $fyydEpisode.num_season

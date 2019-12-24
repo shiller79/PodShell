@@ -102,7 +102,8 @@
         '.\fyyd\Set-FyydCuration.ps1',
         '.\podlove\Export-PodloveWebplayerJson.ps1',
         '.\podlove\Start-PodloveWebPlayer.ps1',
-        '.\podlove\Start-PodloveSubscribeButton.ps1'
+        '.\podlove\Start-PodloveSubscribeButton.ps1',
+        '.\wikidata\wikidata.ps1'
     )
         
     # Aus diesem Modul zu exportierende Funktionen. Um optimale Leistung zu erzielen, verwenden Sie keine Platzhalter und löschen den Eintrag nicht. Verwenden Sie ein leeres Array, wenn keine zu exportierenden Funktionen vorhanden sind.
@@ -143,7 +144,9 @@
         'Search-FyydPodcast',
         'Set-FyydCurate',
         'Set-FyydCuration',
-        'Start-PodloveSubsribeButton'
+        'Start-PodloveSubsribeButton',
+        'Invoke-WikidataApi',
+        'Get-WikidataPodcasts'
     )
 
     # Die aus diesem Modul zu exportierenden Variablen
