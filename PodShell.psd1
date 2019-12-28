@@ -103,7 +103,8 @@
         '.\podlove\Export-PodloveWebplayerJson.ps1',
         '.\podlove\Start-PodloveWebPlayer.ps1',
         '.\podlove\Start-PodloveSubscribeButton.ps1',
-        '.\wikidata\wikidata.ps1'
+        '.\wikidata\wikidata.ps1',
+        '.\auphonic\auphonic.ps1'
     )
         
     # Aus diesem Modul zu exportierende Funktionen. Um optimale Leistung zu erzielen, verwenden Sie keine Platzhalter und löschen den Eintrag nicht. Verwenden Sie ein leeres Array, wenn keine zu exportierenden Funktionen vorhanden sind.
@@ -146,7 +147,11 @@
         'Set-FyydCuration',
         'Start-PodloveSubsribeButton',
         'Invoke-WikidataApi',
-        'Get-WikidataPodcasts'
+        'Get-WikidataPodcasts',
+        'Invoke-AuphonicApi',
+        'Invoke-AuphonicUpload',
+        'Get-AuphonicPresets',
+        'Get-AuphonicProductions'
     )
 
     # Die aus diesem Modul zu exportierenden Variablen
