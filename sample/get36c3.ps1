@@ -3,4 +3,4 @@
   Sort-Object -Property pubdate |
   Select-Object title, pubdate, FyydEpisodeId |
   Out-GridView -PassThru |
-  Set-FyydCurate -curation_id 3905
+  Set-FyydCurate -curation_id 3905 -force_state 1
